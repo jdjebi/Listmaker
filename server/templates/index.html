@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+{% include 'styles.html' %}
+{% endblock %}
+
+{% block content %}
+
+<style type="text/css">
+	.home-header{
+		margin-top: 6em;
+		text-align: center;
+		display: block;
+	}
+	.app-main-btns{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+	.app-main-btns .btn{
+		font-weight: 500
+	}
+</style>
+
+{% include 'notifs.html' %}
+
+<div class="container">
+	<div class="home-header">
+		<h1 class="logo">ListMaker</h1>		
+	</div>
+	<div class="app-main-btns mt-5 mb-5 flex-sm-colum">
+		<button type="button" class="btn btn-lg btn-export mb-4 mr-3" data-toggle="modal" data-target="#new-list">Nouvelle liste</button>	
+		<a class="btn btn-lg btn-light mb-4" href="{% url 'new_random_tab' %}">Créer une liste aléatoire</a>
+	</div>
+	<div class="block">
+		<!--
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Fichier de tableau enregistré</th>
+		      <th scope="col">Date création</th>
+		      <th scope="col" ></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for file in csv_files %}
+			  	{% if file.check_local_file_exist %}
+			  	<tr>
+			      	<th scope="row">{{ forloop.counter }}</th>
+			      	<td><a href="{% url 'app' file.id  %}"><span class="font-success font-w7">{{file.get_name}}</span></a></td>
+			      	<td>{{file.date_creation}}</td>
+			     	<td>
+			     		<button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#delete-modal-{{file.id}}">Supprimer</button>
+			     	</td>
+			    </tr>
+			  	{% else %}
+  			    <tr class="table-warning">
+		      		<th scope="row">{{ forloop.counter }}</th>
+			    	<td><span class="text-dark font-w7">{{file.get_name}} - Fichier de données introuvable</span></a></td>
+			    	<td>{{file.date_creation}}</td>
+			    	<td>
+			     		<button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#delete-modal-{{file.id}}">Supprimer</button>
+			    	</td>
+			    </tr>
+			  	{% endif %}
+		    {% endfor %}
+		  </tbody>
+		</table>
+		-->
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Fichiers enregistrés</th>
+		      <th scope="col">Date création</th>
+		      <th scope="col" ></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for kfile in kfiles %}
+			  	<tr>
+			      	<th scope="row">{{ forloop.counter }}</th>
+			      	<td><a href="{% url 'viewer_v1' kfile %}"><span class="font-success font-w7">{{kfile}}</span></a></td>
+			      	<td>Inconnue</td>
+			     	<td>
+			     		<button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#delete-modal-{{file.id}}">Supprimer</button>
+			     	</td>
+			    </tr>
+		    {% endfor %}
+		  </tbody>
+		</table>
+	</div>	
+</div>
+{% for file in csv_files %}
+<div class="modal fade" id="delete-modal-{{file.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	Voulez vous supprimer le fichier {{file.get_name}} ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Annuler</button>
+        <a class="btn btn-danger" href="{% url 'delete_tab' file.id %}"><span>Créer</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<div class="modal fade" id="new-list" tabindex="-1" role="dialog" aria-labelledby="new-list-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="form">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="new-list-modal">Nouvelle liste</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bg-light">
+      	<form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Titre de la liste:</label>
+            <input id="list-name" type="text" class="form-control">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Annuler</button>
+        <button id="lmk-create-btn-next" type="button" class="btn btn-export">Suivant</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="config-list" tabindex="-1" role="dialog" aria-labelledby="config-list-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="form">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="config-list-modal">Configuration de la liste</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bg-light">
+      	<div class="form-row align-items-center">
+      		<div class="col-md-3 mb-3">
+      			<label class="h6" for="col-title">Colonne:</label>
+      		</div>
+      		<div class="col-md-6 mb-3">
+				<input id="list-name-to-create" type="text" class="form-control" id="col-title" placeholder="Titre">
+      		</div>
+      		<div class="col-md-3 mb-3">
+      			<button type="submit" class="btn btn-block btn-export">Ajouter</button>
+      		</div>
+      	</div>
+      	<hr>
+      	<div class="cols">
+      		<span class="text-muted">Aucune colonnes</span>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Retour</button>
+        <a class="btn btn-export" href="#"><span>Crée la liste</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+
+<script type="text/javascript">
+
+var NewListModal = $('#new-list');
+var ListNameInput = $("#list-name");
+var NextBtn = $("#lmk-create-btn-next");
+
+var ConfigListModal = $("#config-list");
+var ListNameInput2 = $("#list-name-to-create")
+
+NewListModal.on('show.bs.modal',function(){
+	ListNameInput.val('')
+})
+
+NewListModal.modal('show');
+
+NextBtn.on('click',function(){
+	var list_name = ListNameInput.val();
+
+	ListNameInput2.attr('value',list_name);
+
+	ConfigListModal.modal('show');
+});
+	
+</script>
+
+{% endblock %}

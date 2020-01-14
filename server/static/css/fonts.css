@@ -1,0 +1,112 @@
+.it-connect, .it-text{
+  font-weight: 300;
+
+}
+
+.it-font-small{
+  font-size: 0.8em
+}
+
+.it-font-medium{
+  font-size: 1.4em
+}
+
+.it-font-large{
+  font-size: 3em
+}
+
+.it-font-ultra-large{
+  font-size: 3.5em
+}
+
+.it-font-w6{
+  font-weight: 600
+}
+
+.it-font-w7{
+  font-weight: 700
+}
+
+.it-text-secondary{
+  color: #475059
+}
+
+.it-text-error{
+  color: #E53935;
+}
+
+.it-text-white{
+  color: #fff
+}
+
+.it-blue-dark{
+  color: #607d8b;
+}
+
+.it-gold-dark{
+  color: #ae7f13;
+}
+
+.it-text-primary{
+  color: #009fee;
+}
+
+.it-text-muted{
+  color:#6c757d !important;
+}
+
+.it-text-success{
+  color : #26A69A
+}
+
+.it-link-muted{
+  color:#6c757d
+}
+
+.it-link-muted:hover{
+  color:#ae7f13;
+}
+
+.it-header{
+  color: #475059;
+  font-weight: 600;
+}
+
+.copyright{
+  color: #a29b8c
+}
+
+.bold-title, .it-font-w5{
+  font-weight: 500
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(materialize/fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(materialize/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+    url(materialize/fonts/MaterialIcons-Regular.woff) format('woff'),
+    url(materialize/fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}

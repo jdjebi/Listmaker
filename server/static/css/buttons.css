@@ -1,0 +1,134 @@
+button:focus{
+	background-color: transparent;
+}
+
+.btn-it{
+	background-color: transparent;
+	box-shadow: none;
+	border: 2px solid #000;
+	border-radius: 26px;
+	padding: 8px 20px;
+	font-size: 16px;
+  	font-weight: 500;
+  	transition: all 0.16s linear;
+  	cursor:pointer;
+}
+
+.btn-it-sm{
+	border-width: 1px;
+	font-size: 14px;
+	padding: 2px 15px 2px 15px
+}
+
+.btn-it-r1{
+	border-radius: 10px; 
+}
+
+.btn-it:hover{
+	cursor: pointer;
+	background-color: #000;
+	color: #fff
+}
+
+.btn-it-blue-dark{
+	color: #607d8b;
+	border-color:#607d8b;
+}
+
+.btn-it-blue-dark-active{
+	color: #fff;
+	border-color: #607d8b;
+	background-color: #607d8b;
+}
+
+.btn-it-blue-dark:hover, .btn-it-blue-dark-active:hover{
+	background-color: #607d8b;
+}
+
+.btn-it-primary{
+	color: #009fee;
+	border-color:#009fee;
+}
+
+.btn-it-primary-active{
+	color: #fff;
+	border-color:#009fee;
+	background-color: #009fee;
+}
+
+.btn-it-primary:hover, .btn-it-primary-active:hover{
+	background-color: #009fee
+}
+
+.btn-it-danger{
+	color: #E53935;
+	border-color:#E53935;
+}
+
+.btn-it-danger-active{
+	color: #fff;
+	border-color:#E53935;
+	background-color: #E53935
+}
+
+
+.btn-it-danger:hover, .btn-it-danger-active:hover{
+	background-color: #E53935
+}
+
+.btn-it-success{
+	color: #009688;
+	border-color:#009688;
+}
+
+.btn-it-success-active{
+	color: #fff;
+	border-color:#009688;
+	background-color: #009688
+}
+
+.btn-it-success:hover, .btn-it-success-active:hover{
+	background-color: #009688
+}
+
+.btn-it-gold{
+	color: #ffb300;
+	border-color:#ffb300;
+}
+
+.btn-it-gold-active{
+	color: #fff;
+	border-color:#ffb300;
+	background-color:#ffb300;
+}
+
+.btn-it-gold:hover, .btn-it-gold-active:hover{
+	background-color: #ffb300
+}
+
+.btn-it-gold-dark{
+	color: #ae7f13;
+	border-color:#ae7f13;
+}
+
+.btn-it-gold-dark-active{
+	color:#fff;
+	border-color: #ae7f13;
+	background-color:#ae7f13;
+}
+
+.btn-it-gold-dark:hover, .btn-it-gold-dark-active:hover{
+	background-color: #ae7f13;
+}
+
+.btn-404{
+	background-color: #ae7f13;
+	font-family: Montserrat;
+}
+
+.btn-404:hover{
+	background-color: #9c7210
+}
+
+
+

@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+{% include 'styles.html' %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'notifs.html' %}
+<style type="text/css">
+	body{
+		background-color: #f5f5f5
+	}
+	#tools-bar{
+		background: #f2f2f2;
+	    border-top: 1px solid #e4e4e4;
+	    line-height: 40px;
+	    min-width: 1100px;
+	}
+
+	#tools-bar .content{
+		border-bottom: 1px solid #e4e4e4;
+	}
+
+	#tools-bar .content .tools{
+		color: rgba(0,0,0,.54);
+		padding-top: 5px;
+		padding-bottom: 5px;
+    	padding-left: 10px;
+	}
+
+	#tools-bar .content .tools .tools-group{
+		display: inline-block;
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	#tools-bar .content .tools .tools-group .btn{
+		border-radius: 0px;
+	}
+
+	#tools-bar .content .tools .tools-group.right-bar{
+		border-right: 1px solid #e4e4e4;
+	}
+</style>
+<header class="text-white bg-success2">
+	<h6 class="text-center">
+		{% if doc_results %}
+		Liste avec sélection
+		{% else %}
+		Liste sans sélection
+		{% endif %}
+		&middot
+		{{csv_file.get_name}}
+	</h6>
+</header>
+<div id="tools-bar">
+	<div class="content">
+		<div class="tools">
+			<div class="tools-group right-bar">
+				<span class="font-w7 h4"><a href="{% url 'select' %}"><span class="text-muted">CitySelector</span></a></span>
+			</div>
+			<div class="tools-group right-bar">
+				<button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ouvrir </button>
+				<div class="dropdown-menu">
+					{% for file in csv_files %}
+						{% if file.check_local_file_exist %}
+						<a class="dropdown-item" href="{% url 'app' file.id %}">{{file.get_name}}</a>
+						{% endif %}
+					{% empty %}
+						<a class="dropdown-item" href="#">Aucun fichier</a>
+					{% endfor %}					
+				</div>
+			</div>
+			<div class="tools-group">
+				{% if doc_results %}
+				<a href="{% url 'app' csv_file.id %}" class="btn btn-md btn-export">Rétablir la liste</a>
+				{% else %}
+				<a href="{% url 'app' csv_file.id %}?show_results=1" class="btn btn-md btn-export">Traiter la liste</a>
+				{% endif %}
+			</div>
+			<div class="tools-group right-bar">
+				{% if doc_results %}
+					<button class="btn btn-export dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exporter les résultats </button>
+					<div class="dropdown-menu">
+						<a href="{% url 'export_results' csv_file.id %}" class="dropdown-item">Exporter au format excel (xlsx)</a>
+					</div>
+				{% else %}
+					<a href="#" class="btn btn-md btn-export disabled">Exporter les résultats</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<main>
+	{% if not etudiants %}
+	<div class="text-center">
+		<div class="text-muted h4 mt-5">Rien à afficher</div>		
+	</div>
+	{% else %}
+	<table class="table table-bordered bg-white table-striped table-sm">
+	  <thead>
+	    <tr>
+	      	<th scope="col">#</th>
+	      	<th scope="col">Nom</th>
+	      	<th scope="col">Sexe</th>
+	      	<th scope="col">Age</th>
+	      	<th scope="col">Niveau</th>
+	      	<th scope="col">Moyenne</th>
+	      	<th scope="col">Vie scolaire</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	{% for etudiant in etudiants %}	  
+	    <tr>
+	      <th scope="row">{{etudiant.0}}</th>
+	      <td>{{etudiant.1}}</td>
+	      <td>{{etudiant.2}}</td>
+	      <td>{{etudiant.3}}</td>
+	      <td>{{etudiant.4}}</td>
+	      <td>{{etudiant.5}}</td>
+	      <td>{{etudiant.6}}</td>
+	    </tr>  
+	    {% endfor %}
+	  </tbody>
+	</table>
+	{% endif %}
+</main>
+<footer class="u-clearfix">
+	<div class="d-flex flex-row align-items-center justify-content-center">
+		<nav aria-label="navigation">
+		  <ul class="pagination">  	
+		  	{% if page_obj.has_previous %}
+	            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if doc_results %}&show_results=1{% endif %}"><span>&laquo;</span></a></li>
+	        {% else %}
+	           <li class="page-item"><a class="page-link" href="#"><span>&laquo;</span></a></li>	        
+	        {% endif %}
+
+		  	{% for page in paginator.page_range %}
+				{% if doc_results %}
+					<li class="page-item {% if page_obj.number == forloop.counter %}active{% endif %}"><a class="page-link" href="{% url 'app' csv_file.id %}?page={{forloop.counter}}&show_results=1"><span>{{forloop.counter}}</span></a></li>
+				{% else %}
+					<li class="page-item {% if page_obj.number == forloop.counter %}active{% endif %}"><a class="page-link" href="{% url 'app' csv_file.id %}?page={{forloop.counter}}"><span>{{forloop.counter}}</span></a></li>
+				{% endif %}
+			{% endfor %}
+
+			{% if page_obj.has_next %}
+		    	<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if doc_results %}&show_results=1{% endif %}"><span>&raquo;</span></a></li>
+        	{% else %}
+	           <li class="page-item"><a class="page-link" href="#"><span>&raquo;</span></a></li>	
+        	{% endif %}
+		  </ul>
+		</nav>	
+	</div>
+</footer>
+{% endblock %}

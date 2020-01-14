@@ -1,0 +1,44 @@
+.it-error-box, .it-alert-box{
+    border: 1px solid #af4e4e;
+    font-weight: 600;
+    padding: 0.7em;
+    background: #ffb1b1;
+    border-radius: 0.4em;
+}
+
+.it-success-box{
+    border: 1px solid #009688;
+    font-weight: 600;
+    padding: 0.8em;
+    background: #80CBC4;
+    border-radius: 0.4em;
+}
+
+.it-warning-box{
+    border: 1px solid #e2b880;
+    font-weight: 600;
+    padding: 0.8em;
+    background:#faebd7;
+    border-radius: 0.4em;
+}
+
+.it-top-alert-box{
+    font-weight: 600;
+    padding: 0.7em;
+    background: #e48c8c;
+    text-align: center;
+}
+
+.it-top-warning-box{
+    font-weight: 600;
+    padding: 0.7em;
+    background: #ffe9ad;
+    text-align: center;
+} 
+
+.it-top-success-box{
+    font-weight: 600;
+    padding: 0.7em;
+    background: #80CBC4;
+    text-align: center;
+}
