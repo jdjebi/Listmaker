@@ -1,0 +1,22 @@
+.it-box{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-shadow: 0 3px 5px rgba(71,80,89,.1);
+    border-radius: 1em; 
+    border: 1px solid #e1e6eb;
+    color: #111
+}
+
+.it-box-header{
+	border-bottom: 1px solid #e1e6eb;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.it-box-content{
+    padding: 20px;
+}

@@ -1,0 +1,6 @@
+{
+	"SAVE_LMK_FOLDER": "data\\lmk1",
+	"SAVE_LMK_TEST_FOLDER": "python_core\\test_files_created",
+	"LMK_DATA_DIR":["python_core\\test_files_created","data\\lmk1"],
+	"GUI_LMK_VIEWER": "tk_viewer.py"
+}
