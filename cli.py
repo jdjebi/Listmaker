@@ -144,7 +144,7 @@ class test:
 
 	@classmethod
 	def django_server(cls):
-		os.system("start python CitySelector\\manage.py runserver")
+		os.system("start :WAIT python CitySelector\\manage.py runserver")
 
 	@classmethod
 	def django_server_subprocess(cls):
